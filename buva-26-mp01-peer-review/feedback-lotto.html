@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동행롯또 — 동료 피드백</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --surface2: #f1f5f9;
+      --border:   #e2e8f0;
+      --accent:   #0f766e;
+      --good:     #16a34a;
+      --good-bg:  #f0fdf4;
+      --good-br:  #bbf7d0;
+      --improve:  #b45309;
+      --impv-bg:  #fffbeb;
+      --impv-br:  #fde68a;
+      --apply:    #1d4ed8;
+      --aply-bg:  #eff6ff;
+      --aply-br:  #bfdbfe;
+      --text:     #0f172a;
+      --muted:    #64748b;
+      --light:    #94a3b8;
+      --sans:     'Noto Sans KR', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        12px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased; min-height:100vh;
+    }
+    .wrap { max-width:680px; margin:0 auto; padding:56px 24px 88px; }
+
+    .eyebrow {
+      font-family:var(--mono); font-size:10px; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--light); margin-bottom:10px;
+    }
+    h1 { font-size:26px; font-weight:700; line-height:1.25;
+         letter-spacing:-.025em; margin-bottom:6px; }
+    h1 em { font-style:normal; color:var(--accent); }
+    .proj-desc { font-size:14px; color:var(--muted); margin-bottom:20px; }
+    .meta {
+      display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--light);
+      padding-bottom:28px; border-bottom:1.5px solid var(--border); margin-bottom:32px;
+    }
+    .meta-dot { color:var(--border); }
+
+    /* Summary */
+    .summary {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); padding:22px 24px 18px; margin-bottom:36px;
+    }
+    .summary-title {
+      font-family:var(--mono); font-size:9.5px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:18px;
+    }
+    .meter-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .meter-row:last-child { margin-bottom:0; }
+    .m-label { font-size:12px; color:var(--muted); min-width:80px; flex-shrink:0; }
+
+    meter {
+      flex:1; height:7px; -webkit-appearance:none; appearance:none;
+      border:none; border-radius:4px; background:var(--border);
+    }
+    meter::-webkit-meter-bar { background:var(--border); border-radius:4px; border:none; }
+    meter::-webkit-meter-optimum-value,
+    meter::-webkit-meter-suboptimum-value,
+    meter::-webkit-meter-even-less-good-value { background:var(--accent); border-radius:4px; }
+    meter::-moz-meter-bar { background:var(--accent); }
+
+    /* Feedback sections */
+    .fb-section {
+      border-radius:var(--r); border:1px solid transparent;
+      overflow:hidden; margin-bottom:16px;
+    }
+    .fb-section:last-child { margin-bottom:0; }
+
+    .fb-section.good    { border-color:var(--good-br);  background:var(--good-bg); }
+    .fb-section.improve { border-color:var(--impv-br); background:var(--impv-bg); }
+    .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
+
+    .fb-head {
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-bottom:1px solid transparent;
+    }
+    .good    .fb-head { border-bottom-color:var(--good-br); }
+    .improve .fb-head { border-bottom-color:var(--impv-br); }
+    .apply   .fb-head { border-bottom-color:var(--aply-br); }
+
+    .fb-icon {
+      width:20px; height:20px; border-radius:50%;
+      display:grid; place-items:center; font-size:11px; flex-shrink:0;
+    }
+    .good    .fb-icon { background:var(--good);    color:#fff; }
+    .improve .fb-icon { background:var(--improve); color:#fff; }
+    .apply   .fb-icon { background:var(--apply);   color:#fff; }
+
+    .fb-heading {
+      font-size:13px; font-weight:600;
+    }
+    .good    .fb-heading { color:var(--good); }
+    .improve .fb-heading { color:var(--improve); }
+    .apply   .fb-heading { color:var(--apply); }
+
+    .fb-count {
+      margin-left:auto;
+      font-family:var(--mono); font-size:10px; color:var(--light);
+    }
+
+    .fb-items { padding:6px 0; }
+
+    .fb-item {
+      padding:12px 18px;
+      border-bottom:1px solid transparent;
+      font-size:13.5px; color:var(--text);
+      line-height:1.72; white-space:pre-wrap; word-break:break-word;
+    }
+    .fb-item:last-child { border-bottom:none; }
+    .good    .fb-item { border-bottom-color:var(--good-br); }
+    .improve .fb-item { border-bottom-color:var(--impv-br); }
+    .apply   .fb-item { border-bottom-color:var(--aply-br); }
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">미니 프로젝트 1 · 피어 리뷰 · 2026-06-16</div>
+  <h1><em>동행롯또</em> 동료 피드백</h1>
+  <p class="proj-desc">GIANTS AI Analytics | 딥러닝 기반 야구 의사결정 지원 시스템</p>
+  <div class="meta">
+    <span>익명 응답</span>
+    <span class="meta-dot">·</span>
+    <span>총 8건</span>
+    <span class="meta-dot">·</span>
+    <span>점수 100점 만점 환산</span>
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">항목별 평균 (전체 응답자)</div>
+      <div class="meter-row">
+        <span class="m-label">프로젝트 흐름</span>
+        <meter value="95" min="0" max="100" optimum="100">95점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">데이터 분석</span>
+        <meter value="98" min="0" max="100" optimum="100">98점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">모델링 설명</span>
+        <meter value="85" min="0" max="100" optimum="100">85점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">결과물/시연</span>
+        <meter value="90" min="0" max="100" optimum="100">90점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">발표 명확성</span>
+        <meter value="88" min="0" max="100" optimum="100">88점</meter>
+      </div>
+  </div>
+
+  <div class="fb-section good">
+    <div class="fb-head">
+      <span class="fb-icon">✓</span>
+      <span class="fb-heading">좋았던 점</span>
+      <span class="fb-count">7건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">1. 기획의 흥미성과 탁월한 프레젠테이션 센스<br>&#x27;What if&#x27; 기반의 흥미로운 주제<br>: &#x27;그 상황에 다른 선수가 등판했다면 어땠을까?&#x27;라는 야구팬들 특유의 &#x27;방구석 감독&#x27; 같은 호기심을 정확히 자극하고, 이를 데이터로 시원하게 해결해 준 기획이 매우 흥미로웠습니다.<br><br>몰입도를 높이는 비유와 디자인<br>: 모델 선정 과정을 &#x27;야구 투수&#x27;에 빗대어 설명한 점이 참신했습니다. 또한, 프레젠테이션 우측 상단(1시 방향)에 진행 상황을 &#x27;야구 마운드&#x27;로 표현한 디테일이 발표의 몰입감을 크게 높여주었습니다.<br><br>훌륭한 데이터 시각화<br>: 복잡한 분석 결과들을 청중이 한눈에 파악할 수 있도록 구현한 시각화의 퀄리티가 아주 훌륭했습니다.<br><br>2. 도전적인 데이터 수집 및 전처리<br>데이터 확보를 위한 도전적 시도<br>: 쉽게 얻을 수 없는 데이터를 구하기 위해 시도한 접근 방식 자체가 매우 도전적이고 인상 깊었습니다.<br><br>명확한 전처리 과정 설명<br>: 까다롭게 수집한 데이터를 모델링에 맞게 정제해 나가는 전처리 과정의 논리를 명확하게 설명해 주어 이해하기 좋았습니다.<br><br>3. 정교한 모델링 및 피처 엔지니어링 (Feature Engineering)<br>엄격한 학습 규칙(시간 여행 금지) 설정<br>: 이미 결과가 존재하는 과거 데이터를 다룰 때 흔히 범할 수 있는 오류를 방지하기 위해, &#x27;과거 기록만 사용하여 예측한다&#x27;는 명확한 제약(시간 여행 금지)을 둔 점이 분석의 신뢰도를 크게 높였습니다.<br><br>창의적인 파생 변수(WE) 생성<br>: 주어진 데이터에만 의존하지 않고 &#x27;WE&#x27;라는 새로운 피처(Feature)를 직접 기획하고 만들어낸 능동적인 접근 방식이 아주 좋았습니다.<br><br><br>모델의 한계에 대해서 설명<br>- 반드시 이기는 선택은 없다.<br><br>홈페이지 디자인에 대한 철학 설명</div>
+      <div class="fb-item">시각화가 잘 되었음</div>
+      <div class="fb-item">아이디어가 신박해요</div>
+      <div class="fb-item">아이디어 창의성이 좋았습니다.</div>
+      <div class="fb-item">롯데 팬은 아니지만 부산 사람으로써 이입할 수 밖에 없는 부분을 잘 캐치해서 분석하신 것 같습니다. 세이버메트릭스를 해보고 싶어 데이터를 크롤링해서 모아봤던 적이 있어서 많이 어려웠을텐데, 데이터를 잘 모으신 것 같습니다.</div>
+      <div class="fb-item">창의적인 아이디어, 훌륭한 발표</div>
+      <div class="fb-item">롯데가 이길 확률을 구해주세요 흑흑</div>
+    </div>
+  </div>
+
+  <div class="fb-section improve">
+    <div class="fb-head">
+      <span class="fb-icon">△</span>
+      <span class="fb-heading">보완하면 좋을 점</span>
+      <span class="fb-count">6건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">we피쳐와 we피처를 사용한 다른 피처(we_state 등)에 대한 설명 예시를 ppt에서 강화했으면 한다.</div>
+      <div class="fb-item">야구 관련 도메인을 잘 몰라서 용어가 어려웠음</div>
+      <div class="fb-item">모델에 대한 설명이 더 자세하면 좋을거 같아요</div>
+      <div class="fb-item">좀 더 넓은 옵션이나 파라미터를 통해 다양한 결과가 있었으면 좋겠습니다.</div>
+      <div class="fb-item">발표자님이 호소력 있게 발표를 잘 해주셨는데, 시간상 부족했던 것인지 대본없이 ppt 내용 읽기가 주여서 조금 아쉬웠습니다. 그리고 streamlit 구현 웹 사이트의 야구공이 너무 어지러워요........ ㅠㅠ 멀미가 납니다 ㅠㅠㅠㅠ</div>
+      <div class="fb-item">PPT가 맘에 듭니다.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

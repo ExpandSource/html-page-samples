@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAG(세상에 아픈개는 없다) — 동료 피드백</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --surface2: #f1f5f9;
+      --border:   #e2e8f0;
+      --accent:   #0f766e;
+      --good:     #16a34a;
+      --good-bg:  #f0fdf4;
+      --good-br:  #bbf7d0;
+      --improve:  #b45309;
+      --impv-bg:  #fffbeb;
+      --impv-br:  #fde68a;
+      --apply:    #1d4ed8;
+      --aply-bg:  #eff6ff;
+      --aply-br:  #bfdbfe;
+      --text:     #0f172a;
+      --muted:    #64748b;
+      --light:    #94a3b8;
+      --sans:     'Noto Sans KR', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        12px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased; min-height:100vh;
+    }
+    .wrap { max-width:680px; margin:0 auto; padding:56px 24px 88px; }
+
+    .eyebrow {
+      font-family:var(--mono); font-size:10px; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--light); margin-bottom:10px;
+    }
+    h1 { font-size:26px; font-weight:700; line-height:1.25;
+         letter-spacing:-.025em; margin-bottom:6px; }
+    h1 em { font-style:normal; color:var(--accent); }
+    .proj-desc { font-size:14px; color:var(--muted); margin-bottom:20px; }
+    .meta {
+      display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--light);
+      padding-bottom:28px; border-bottom:1.5px solid var(--border); margin-bottom:32px;
+    }
+    .meta-dot { color:var(--border); }
+
+    /* Summary */
+    .summary {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); padding:22px 24px 18px; margin-bottom:36px;
+    }
+    .summary-title {
+      font-family:var(--mono); font-size:9.5px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:18px;
+    }
+    .meter-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .meter-row:last-child { margin-bottom:0; }
+    .m-label { font-size:12px; color:var(--muted); min-width:80px; flex-shrink:0; }
+
+    meter {
+      flex:1; height:7px; -webkit-appearance:none; appearance:none;
+      border:none; border-radius:4px; background:var(--border);
+    }
+    meter::-webkit-meter-bar { background:var(--border); border-radius:4px; border:none; }
+    meter::-webkit-meter-optimum-value,
+    meter::-webkit-meter-suboptimum-value,
+    meter::-webkit-meter-even-less-good-value { background:var(--accent); border-radius:4px; }
+    meter::-moz-meter-bar { background:var(--accent); }
+
+    /* Feedback sections */
+    .fb-section {
+      border-radius:var(--r); border:1px solid transparent;
+      overflow:hidden; margin-bottom:16px;
+    }
+    .fb-section:last-child { margin-bottom:0; }
+
+    .fb-section.good    { border-color:var(--good-br);  background:var(--good-bg); }
+    .fb-section.improve { border-color:var(--impv-br); background:var(--impv-bg); }
+    .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
+
+    .fb-head {
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-bottom:1px solid transparent;
+    }
+    .good    .fb-head { border-bottom-color:var(--good-br); }
+    .improve .fb-head { border-bottom-color:var(--impv-br); }
+    .apply   .fb-head { border-bottom-color:var(--aply-br); }
+
+    .fb-icon {
+      width:20px; height:20px; border-radius:50%;
+      display:grid; place-items:center; font-size:11px; flex-shrink:0;
+    }
+    .good    .fb-icon { background:var(--good);    color:#fff; }
+    .improve .fb-icon { background:var(--improve); color:#fff; }
+    .apply   .fb-icon { background:var(--apply);   color:#fff; }
+
+    .fb-heading {
+      font-size:13px; font-weight:600;
+    }
+    .good    .fb-heading { color:var(--good); }
+    .improve .fb-heading { color:var(--improve); }
+    .apply   .fb-heading { color:var(--apply); }
+
+    .fb-count {
+      margin-left:auto;
+      font-family:var(--mono); font-size:10px; color:var(--light);
+    }
+
+    .fb-items { padding:6px 0; }
+
+    .fb-item {
+      padding:12px 18px;
+      border-bottom:1px solid transparent;
+      font-size:13.5px; color:var(--text);
+      line-height:1.72; white-space:pre-wrap; word-break:break-word;
+    }
+    .fb-item:last-child { border-bottom:none; }
+    .good    .fb-item { border-bottom-color:var(--good-br); }
+    .improve .fb-item { border-bottom-color:var(--impv-br); }
+    .apply   .fb-item { border-bottom-color:var(--aply-br); }
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">미니 프로젝트 1 · 피어 리뷰 · 2026-06-16</div>
+  <h1><em>SAG(세상에 아픈개는 없다)</em> 동료 피드백</h1>
+  <p class="proj-desc">반려동물 피부 질환 감지 CNN 모델</p>
+  <div class="meta">
+    <span>익명 응답</span>
+    <span class="meta-dot">·</span>
+    <span>총 7건</span>
+    <span class="meta-dot">·</span>
+    <span>점수 100점 만점 환산</span>
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">항목별 평균 (전체 응답자)</div>
+      <div class="meter-row">
+        <span class="m-label">프로젝트 흐름</span>
+        <meter value="91" min="0" max="100" optimum="100">91점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">데이터 분석</span>
+        <meter value="83" min="0" max="100" optimum="100">83점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">모델링 설명</span>
+        <meter value="89" min="0" max="100" optimum="100">89점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">결과물/시연</span>
+        <meter value="89" min="0" max="100" optimum="100">89점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">발표 명확성</span>
+        <meter value="86" min="0" max="100" optimum="100">86점</meter>
+      </div>
+  </div>
+
+  <div class="fb-section good">
+    <div class="fb-head">
+      <span class="fb-icon">✓</span>
+      <span class="fb-heading">좋았던 점</span>
+      <span class="fb-count">7건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">데이터셋의 약점과 극복 방법을 자세히 설명해주어서 좋았습니다.</div>
+      <div class="fb-item">댕냥이 사진이 귀여웠다.<br><br>1. 탁월한 비즈니스 기획력과 현실성<br>정확한 타겟팅과 비즈니스 접근<br>&#x27;반려동물 보호자는 반려동물을 위해 기꺼이 지갑을 연다&#x27;는 시장의 핵심을 정확히 파악했습니다. 사진만으로 병원 방문 여부를 판단해 주는 서비스를 기획한 점은 비즈니스적으로 매우 훌륭하고 실용적인 접근이었습니다.<br><br>미래 확장성과 법적 리스크 대비<br>유사 비즈니스 모델을 분석하여 서비스의 미래 방향성을 예측한 점이 좋았습니다. 특히 의료/진단 관련 서비스에서 자칫 놓치기 쉬운 &#x27;법적 고려사항&#x27;까지 꼼꼼하게 준비한 점이 프로젝트의 완성도를 크게 높였습니다.<br><br>2. 깊이 있는 데이터 분석(EDA)과 설득력<br>명확한 EDA와 인사이트 도출<br> 탐색적 데이터 분석(EDA) 과정과 데이터의 특성을 프레젠테이션 시각 자료와 함께 아주 명확하게 설명해 주어 내용이 쏙쏙 들어왔습니다. 분석을 통해 얻은 인사이트의 깊이도 훌륭했습니다.<br><br>설득력 있는 한계점 분석<br>모델링 과정에서 겪은 어려움(동물의 털에 가려진 병변, 시각적으로 증상이 비슷한 질환 등)을 숨기지 않고 설득력 있게 설명해 주어, 오히려 분석 결과에 대한 신뢰도가 더욱 높아졌습니다.<br><br>3. 프레젠테이션 구성과 전달력<br>매끄러운 전체 흐름<br>기획부터 데이터 분석, 결론에 이르기까지 프레젠테이션 전체의 기승전결 구성과 발표 진행 흐름이 막힘없이 명확하고 깔끔했습니다.<br><br><br>4. 기술<br>Grad-CAM 시각화 부분이 아주 훌륭하다고 생각합니다.<br>모델이 주로 어딜 보고있는지를 확인가능.</div>
+      <div class="fb-item">다양한 시각화 자료가 있어 해석하는데 있어 이해가 잘 돼서 좋았습니다</div>
+      <div class="fb-item">진짜 나오나요? 제발</div>
+      <div class="fb-item">고양이를 키우는 입장에서 병원 가야되나 말아야되나 하는 고민을 해결해주는 솔루션이 될 수 있다고 생각합니다</div>
+      <div class="fb-item">피피티 깔끔함 실제로 출시가능한 상품이라 생각되서 좋았음</div>
+      <div class="fb-item">발표 구성이 좋다</div>
+    </div>
+  </div>
+
+  <div class="fb-section improve">
+    <div class="fb-head">
+      <span class="fb-icon">△</span>
+      <span class="fb-heading">보완하면 좋을 점</span>
+      <span class="fb-count">4건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">PPT의 논리 전개를 본받고 싶습니다.</div>
+      <div class="fb-item">사용자가 사이트에 현재 고양이나 강아지의 상태를 자연어로 입력하고 거기에 관련있는 질병과 병원 가야될지 말아야할지 알려주는 기능도 있으면 좋겠습니다.</div>
+      <div class="fb-item">개의 자료가 많고 고양이의 자료가 적다고 했는데 고양이의 정확도가 더 높게 나온거면 학습할 수록 정밀도가 떨어진다고 봐도되는건지. 그렇다면 모델이 잘못되었다고 생각하지는 않는지 궁금함</div>
+      <div class="fb-item">다양한 종의 예시를 보여주면 좋겠다</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
