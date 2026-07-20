@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntelliPolis — 동료 피드백</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --border:   #e2e8f0;
+      --accent:   #0f766e;
+      --good:     #16a34a;
+      --good-bg:  #f0fdf4;
+      --good-br:  #bbf7d0;
+      --improve:  #b45309;
+      --impv-bg:  #fffbeb;
+      --impv-br:  #fde68a;
+      --apply:    #1d4ed8;
+      --aply-bg:  #eff6ff;
+      --aply-br:  #bfdbfe;
+      --text:     #0f172a;
+      --muted:    #475569;
+      --light:    #94a3b8;
+      --sans:     'Noto Sans KR', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        14px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased;
+      font-size:17px; line-height:1.7; min-height:100vh;
+    }
+    .wrap { max-width:740px; margin:0 auto; padding:60px 28px 100px; }
+
+    .eyebrow {
+      font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:12px;
+    }
+    h1 {
+      font-size:32px; font-weight:700; line-height:1.2;
+      letter-spacing:-.03em; margin-bottom:8px;
+    }
+    h1 em { font-style:normal; color:var(--accent); }
+    .proj-desc { font-size:16px; color:var(--muted); margin-bottom:22px; }
+    .meta {
+      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--light);
+      padding-bottom:32px; border-bottom:1.5px solid var(--border); margin-bottom:36px;
+    }
+    .meta-dot { color:var(--border); }
+
+    /* Feedback sections */
+    .fb-section {
+      border-radius:var(--r); border:1px solid transparent;
+      overflow:hidden; margin-bottom:20px;
+    }
+    .fb-section:last-child { margin-bottom:0; }
+
+    .fb-section.good    { border-color:var(--good-br);  background:var(--good-bg); }
+    .fb-section.improve { border-color:var(--impv-br); background:var(--impv-bg); }
+    .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
+
+    .fb-head {
+      display:flex; align-items:center; gap:10px;
+      padding:16px 22px; border-bottom:1px solid transparent;
+    }
+    .good    .fb-head { border-bottom-color:var(--good-br); }
+    .improve .fb-head { border-bottom-color:var(--impv-br); }
+    .apply   .fb-head { border-bottom-color:var(--aply-br); }
+
+    .fb-icon {
+      width:24px; height:24px; border-radius:50%;
+      display:grid; place-items:center; font-size:13px; flex-shrink:0;
+    }
+    .good    .fb-icon { background:var(--good);    color:#fff; }
+    .improve .fb-icon { background:var(--improve); color:#fff; }
+    .apply   .fb-icon { background:var(--apply);   color:#fff; }
+
+    .fb-heading { font-size:15px; font-weight:600; }
+    .good    .fb-heading { color:var(--good); }
+    .improve .fb-heading { color:var(--improve); }
+    .apply   .fb-heading { color:var(--apply); }
+
+    .fb-count {
+      margin-left:auto;
+      font-family:var(--mono); font-size:11px; color:var(--light);
+    }
+
+    .fb-items { padding:8px 0; }
+
+    .fb-item {
+      padding:16px 22px;
+      border-bottom:1px solid transparent;
+      font-size:16px; color:var(--text);
+      line-height:1.78; white-space:pre-wrap; word-break:break-word;
+    }
+    .fb-item:last-child { border-bottom:none; }
+    .good    .fb-item { border-bottom-color:var(--good-br); }
+    .improve .fb-item { border-bottom-color:var(--impv-br); }
+    .apply   .fb-item { border-bottom-color:var(--aply-br); }
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">미니 프로젝트 2 · 피어 리뷰 · 2026-07-20</div>
+  <h1><em>IntelliPolis</em> 동료 피드백</h1>
+  <p class="proj-desc">AI 기반 도시계획 의사결정 지원 플랫폼</p>
+  <div class="meta">
+    <span>익명 응답</span>
+    <span class="meta-dot">·</span>
+    <span>총 5건</span>
+  </div>
+
+  <div class="fb-section good">
+    <div class="fb-head">
+      <span class="fb-icon">✓</span>
+      <span class="fb-heading">좋았던 점</span>
+      <span class="fb-count">5건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">도시 계획을 분석한다는 아이디어와 AI를 쓴 방식에서 데이터 처리방식이 인상적입니다.</div>
+      <div class="fb-item">지역 문제 해결을 위한 공공 서비스로 발전할 수 있는 확장성이 눈에 띄었다.</div>
+      <div class="fb-item">HTML 과 TSX 에 대해서 차이, (TSX가 왜 장점인지 설명, HTML은 새로고침이 필요한 반면, TSX는 바로바로 반영가능)<br>실제 데모가 좋았다. <br>- 1. 프론트가 너무 이쁨 진짜 세련된 유니콘 기업 UI같음.<br>- 2. 북구의 경우 실제 공원이 있는곳이 추천되어서 아주 타당성있는것 같다.</div>
+      <div class="fb-item">생소한 개념을 쉽게 설명해주어서 이해하는데 도움이 되었다.<br>ui/ux가 직관적이라 발표자의 말대로 보기만해도 사용법을 알기 쉬웠다.</div>
+      <div class="fb-item">UI가 사용자 입장에서 전달이 잘 된 점이 좋았음</div>
+    </div>
+  </div>
+
+  <div class="fb-section improve">
+    <div class="fb-head">
+      <span class="fb-icon">△</span>
+      <span class="fb-heading">보완하면 좋을 점</span>
+      <span class="fb-count">3건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">프로젝트의 거시적인 의미가 더 명확히 전달되었다면 좋았을 것 같습니다.</div>
+      <div class="fb-item">실제 지도 API의 경우 프로바이더마다 정보가 다를 수 있을 것 같습니다. 그리고 거주 주민과 소득층 등 지역적 특성에 따라 필요한 시설도 다를 것 같습니다. 짧은 프로젝트 기간 안에 구현은 어렵겠지만 기획 단계에서 위와 같은 데이터에 대한 연구와 데이터의 정확성 등을 보충할 방법에 대한 고민이 있었으면 더 좋았을 것 같습니다.</div>
+      <div class="fb-item">향후 발전 방향에서 정책 시행 전후 비교 시뮬레이션 이 완성되면 좋겠다. (보여주기에 좋을듯)</div>
+    </div>
+  </div>
+
+  <div class="fb-section apply">
+    <div class="fb-head">
+      <span class="fb-icon">→</span>
+      <span class="fb-heading">참고하고 싶은 점</span>
+      <span class="fb-count">2건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">웹사이트가 너무 멋지고 UX 구현 방식을 적용하고 싶습니다.</div>
+      <div class="fb-item">웹 UI 가 너무 이쁘다.(특히 로딩창)</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

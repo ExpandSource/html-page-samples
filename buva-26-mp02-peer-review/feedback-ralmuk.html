@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>랄먹 — 동료 피드백</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --border:   #e2e8f0;
+      --accent:   #0f766e;
+      --good:     #16a34a;
+      --good-bg:  #f0fdf4;
+      --good-br:  #bbf7d0;
+      --improve:  #b45309;
+      --impv-bg:  #fffbeb;
+      --impv-br:  #fde68a;
+      --apply:    #1d4ed8;
+      --aply-bg:  #eff6ff;
+      --aply-br:  #bfdbfe;
+      --text:     #0f172a;
+      --muted:    #475569;
+      --light:    #94a3b8;
+      --sans:     'Noto Sans KR', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        14px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased;
+      font-size:17px; line-height:1.7; min-height:100vh;
+    }
+    .wrap { max-width:740px; margin:0 auto; padding:60px 28px 100px; }
+
+    .eyebrow {
+      font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:12px;
+    }
+    h1 {
+      font-size:32px; font-weight:700; line-height:1.2;
+      letter-spacing:-.03em; margin-bottom:8px;
+    }
+    h1 em { font-style:normal; color:var(--accent); }
+    .proj-desc { font-size:16px; color:var(--muted); margin-bottom:22px; }
+    .meta {
+      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--light);
+      padding-bottom:32px; border-bottom:1.5px solid var(--border); margin-bottom:36px;
+    }
+    .meta-dot { color:var(--border); }
+
+    /* Feedback sections */
+    .fb-section {
+      border-radius:var(--r); border:1px solid transparent;
+      overflow:hidden; margin-bottom:20px;
+    }
+    .fb-section:last-child { margin-bottom:0; }
+
+    .fb-section.good    { border-color:var(--good-br);  background:var(--good-bg); }
+    .fb-section.improve { border-color:var(--impv-br); background:var(--impv-bg); }
+    .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
+
+    .fb-head {
+      display:flex; align-items:center; gap:10px;
+      padding:16px 22px; border-bottom:1px solid transparent;
+    }
+    .good    .fb-head { border-bottom-color:var(--good-br); }
+    .improve .fb-head { border-bottom-color:var(--impv-br); }
+    .apply   .fb-head { border-bottom-color:var(--aply-br); }
+
+    .fb-icon {
+      width:24px; height:24px; border-radius:50%;
+      display:grid; place-items:center; font-size:13px; flex-shrink:0;
+    }
+    .good    .fb-icon { background:var(--good);    color:#fff; }
+    .improve .fb-icon { background:var(--improve); color:#fff; }
+    .apply   .fb-icon { background:var(--apply);   color:#fff; }
+
+    .fb-heading { font-size:15px; font-weight:600; }
+    .good    .fb-heading { color:var(--good); }
+    .improve .fb-heading { color:var(--improve); }
+    .apply   .fb-heading { color:var(--apply); }
+
+    .fb-count {
+      margin-left:auto;
+      font-family:var(--mono); font-size:11px; color:var(--light);
+    }
+
+    .fb-items { padding:8px 0; }
+
+    .fb-item {
+      padding:16px 22px;
+      border-bottom:1px solid transparent;
+      font-size:16px; color:var(--text);
+      line-height:1.78; white-space:pre-wrap; word-break:break-word;
+    }
+    .fb-item:last-child { border-bottom:none; }
+    .good    .fb-item { border-bottom-color:var(--good-br); }
+    .improve .fb-item { border-bottom-color:var(--impv-br); }
+    .apply   .fb-item { border-bottom-color:var(--aply-br); }
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">미니 프로젝트 2 · 피어 리뷰 · 2026-07-20</div>
+  <h1><em>랄먹</em> 동료 피드백</h1>
+  <p class="proj-desc">AI 기반 게임 테스트 케이스 자동 생성 및 협업 파이프라인</p>
+  <div class="meta">
+    <span>익명 응답</span>
+    <span class="meta-dot">·</span>
+    <span>총 5건</span>
+  </div>
+
+  <div class="fb-section good">
+    <div class="fb-head">
+      <span class="fb-icon">✓</span>
+      <span class="fb-heading">좋았던 점</span>
+      <span class="fb-count">4건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">유저 레벨에서 검증 승인만으로 만들어 지는게 좋은 것 같습니다.</div>
+      <div class="fb-item">게임을 만들어서 시연하는게 신기했어요</div>
+      <div class="fb-item">랄프루프를 참여하면서 어떻게 설계했는지부터 무엇을 구현했고, 어떤걸 느꼈는지 설명을 자세히 해주셔서 내가 직접 참여한 것 같은 느낌을 줬음.</div>
+      <div class="fb-item">요즘 AI가 하드 코딩을 하는 시대에 인상적인 주제 선정이였고 AI 에이전트를 이용하여 설계방식이 매우 인상적이였습니다.</div>
+    </div>
+  </div>
+
+  <div class="fb-section improve">
+    <div class="fb-head">
+      <span class="fb-icon">△</span>
+      <span class="fb-heading">보완하면 좋을 점</span>
+      <span class="fb-count">4건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">기능을 잘 사용하려고 했을 때 어떤 식으로 입력하는게 더 잘 작동하는지에 대한 예시가 더 있었으면 좋겠어요!</div>
+      <div class="fb-item">ppt 배경이 너무 어두워요</div>
+      <div class="fb-item">현 프로젝트와 관련된 프로젝트가 아니다 보니, 설명이나 보완했으면 하는 부분을 말하기 힘듦.</div>
+      <div class="fb-item">Decomposition 수준이 조금 더 명시화 되었으면 좋았을 것 같습니다.</div>
+    </div>
+  </div>
+
+  <div class="fb-section apply">
+    <div class="fb-head">
+      <span class="fb-icon">→</span>
+      <span class="fb-heading">참고하고 싶은 점</span>
+      <span class="fb-count">3건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">기능 자체를 사용해보고 싶습니다.</div>
+      <div class="fb-item">프롬프트를 효율적으로 작성하는 요령에 대해 설명해주셨는데, 이 부분을 저도 참고해서 AI를 활용해봐야겠다고 생각함.</div>
+      <div class="fb-item">아이디어!</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

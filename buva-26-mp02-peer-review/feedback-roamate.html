@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROAMATE — 동료 피드백</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --border:   #e2e8f0;
+      --accent:   #0f766e;
+      --good:     #16a34a;
+      --good-bg:  #f0fdf4;
+      --good-br:  #bbf7d0;
+      --improve:  #b45309;
+      --impv-bg:  #fffbeb;
+      --impv-br:  #fde68a;
+      --apply:    #1d4ed8;
+      --aply-bg:  #eff6ff;
+      --aply-br:  #bfdbfe;
+      --text:     #0f172a;
+      --muted:    #475569;
+      --light:    #94a3b8;
+      --sans:     'Noto Sans KR', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        14px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); -webkit-font-smoothing:antialiased;
+      font-size:17px; line-height:1.7; min-height:100vh;
+    }
+    .wrap { max-width:740px; margin:0 auto; padding:60px 28px 100px; }
+
+    .eyebrow {
+      font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:12px;
+    }
+    h1 {
+      font-size:32px; font-weight:700; line-height:1.2;
+      letter-spacing:-.03em; margin-bottom:8px;
+    }
+    h1 em { font-style:normal; color:var(--accent); }
+    .proj-desc { font-size:16px; color:var(--muted); margin-bottom:22px; }
+    .meta {
+      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--light);
+      padding-bottom:32px; border-bottom:1.5px solid var(--border); margin-bottom:36px;
+    }
+    .meta-dot { color:var(--border); }
+
+    /* Feedback sections */
+    .fb-section {
+      border-radius:var(--r); border:1px solid transparent;
+      overflow:hidden; margin-bottom:20px;
+    }
+    .fb-section:last-child { margin-bottom:0; }
+
+    .fb-section.good    { border-color:var(--good-br);  background:var(--good-bg); }
+    .fb-section.improve { border-color:var(--impv-br); background:var(--impv-bg); }
+    .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
+
+    .fb-head {
+      display:flex; align-items:center; gap:10px;
+      padding:16px 22px; border-bottom:1px solid transparent;
+    }
+    .good    .fb-head { border-bottom-color:var(--good-br); }
+    .improve .fb-head { border-bottom-color:var(--impv-br); }
+    .apply   .fb-head { border-bottom-color:var(--aply-br); }
+
+    .fb-icon {
+      width:24px; height:24px; border-radius:50%;
+      display:grid; place-items:center; font-size:13px; flex-shrink:0;
+    }
+    .good    .fb-icon { background:var(--good);    color:#fff; }
+    .improve .fb-icon { background:var(--improve); color:#fff; }
+    .apply   .fb-icon { background:var(--apply);   color:#fff; }
+
+    .fb-heading { font-size:15px; font-weight:600; }
+    .good    .fb-heading { color:var(--good); }
+    .improve .fb-heading { color:var(--improve); }
+    .apply   .fb-heading { color:var(--apply); }
+
+    .fb-count {
+      margin-left:auto;
+      font-family:var(--mono); font-size:11px; color:var(--light);
+    }
+
+    .fb-items { padding:8px 0; }
+
+    .fb-item {
+      padding:16px 22px;
+      border-bottom:1px solid transparent;
+      font-size:16px; color:var(--text);
+      line-height:1.78; white-space:pre-wrap; word-break:break-word;
+    }
+    .fb-item:last-child { border-bottom:none; }
+    .good    .fb-item { border-bottom-color:var(--good-br); }
+    .improve .fb-item { border-bottom-color:var(--impv-br); }
+    .apply   .fb-item { border-bottom-color:var(--aply-br); }
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">미니 프로젝트 2 · 피어 리뷰 · 2026-07-20</div>
+  <h1><em>ROAMATE</em> 동료 피드백</h1>
+  <p class="proj-desc">AI 기반 실시간 여행 동반 가이드 &amp; 여행 비서</p>
+  <div class="meta">
+    <span>익명 응답</span>
+    <span class="meta-dot">·</span>
+    <span>총 6건</span>
+  </div>
+
+  <div class="fb-section good">
+    <div class="fb-head">
+      <span class="fb-icon">✓</span>
+      <span class="fb-heading">좋았던 점</span>
+      <span class="fb-count">6건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">MBTI p인 저도 활용할 수 있을만한 기능이 좋아보인다. 여행계획을 세우지 않아도 그날 기분따라 바이브 트립이 가능할 것 같다.</div>
+      <div class="fb-item">아이디어가 실용적임</div>
+      <div class="fb-item">React처럼 팀원 개개인이 컴포넌트처럼 조립해서 만들었다는 느낌이 아주 강해서 보기 좋았음</div>
+      <div class="fb-item">실제로 여행 도중에 실시간으로 변경 할 수 있다는 점이 좋았다.<br>PPT가 고급스럽다.<br>설계 철학에 대해서 정말 잘 설명하였다. (폴백, api로 받아오는것이 일부 멈추더라도, 잘 되게)</div>
+      <div class="fb-item">css, 컴포넌트 배치가 이쁘고 깔끔함.</div>
+      <div class="fb-item">UI 굿</div>
+    </div>
+  </div>
+
+  <div class="fb-section improve">
+    <div class="fb-head">
+      <span class="fb-icon">△</span>
+      <span class="fb-heading">보완하면 좋을 점</span>
+      <span class="fb-count">5건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">데모를 보니 사이드바가 많아 서비스에 집중도가 떨어지는 느낌을 받았다.</div>
+      <div class="fb-item">AI의 자연어 해석이 중요한 기능인 것 같은데 AI가 의도 분류를 어떻게 하는지 설명이 있었으면 더 좋았을 것 같습니다.<br>AI의 툴콜링을 이용해 정보를 안내하는 것 같은데 실제 지도나 API 데이터가 현실과 맞지 않을 때 대처 방법이 있었으면 더 좋았을 것 같습니다.</div>
+      <div class="fb-item">발표도 깔끔하고 프로젝트의 목적과 구현 과정과 그 내용이 한눈에 잘 보여서 좋았지만, Spring AI 미사용이라는 부분에서 결국엔 이 프로젝트의 궁극적인 목적이 흐려진게 아닌가 하는 생각이 들었음.</div>
+      <div class="fb-item">ppt 한 페이지당 토크 분량이 너무김</div>
+      <div class="fb-item">시연에서 직접 한번 시연해보고 싶습니다. 내가 여행을 간다면 하고요</div>
+    </div>
+  </div>
+
+  <div class="fb-section apply">
+    <div class="fb-head">
+      <span class="fb-icon">→</span>
+      <span class="fb-heading">참고하고 싶은 점</span>
+      <span class="fb-count">4건</span>
+    </div>
+    <div class="fb-items">
+      <div class="fb-item">지도 시각화 부분에서 깔끔하게 된 것 같아서 참고해보고 싶었음.</div>
+      <div class="fb-item">ppt 너무 깔끔하게 잘만들었고, 발표가 물이 흐르듯이 진행되었다.</div>
+      <div class="fb-item">컴포넌트배치</div>
+      <div class="fb-item">막힘 없는 발표</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
