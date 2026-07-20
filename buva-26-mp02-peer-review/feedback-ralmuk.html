@@ -9,6 +9,7 @@
     :root {
       --bg:       #f8fafc;
       --surface:  #ffffff;
+      --surface2: #f1f5f9;
       --border:   #e2e8f0;
       --accent:   #0f766e;
       --good:     #16a34a;
@@ -21,41 +22,61 @@
       --aply-bg:  #eff6ff;
       --aply-br:  #bfdbfe;
       --text:     #0f172a;
-      --muted:    #475569;
+      --muted:    #64748b;
       --light:    #94a3b8;
       --sans:     'Noto Sans KR', sans-serif;
       --mono:     'JetBrains Mono', monospace;
-      --r:        14px;
+      --r:        12px;
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
       background:var(--bg); color:var(--text);
-      font-family:var(--sans); -webkit-font-smoothing:antialiased;
-      font-size:17px; line-height:1.7; min-height:100vh;
+      font-family:var(--sans); -webkit-font-smoothing:antialiased; min-height:100vh;
     }
-    .wrap { max-width:740px; margin:0 auto; padding:60px 28px 100px; }
+    .wrap { max-width:680px; margin:0 auto; padding:56px 24px 88px; }
 
     .eyebrow {
-      font-family:var(--mono); font-size:11px; letter-spacing:.14em;
-      text-transform:uppercase; color:var(--light); margin-bottom:12px;
+      font-family:var(--mono); font-size:10px; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--light); margin-bottom:10px;
     }
-    h1 {
-      font-size:32px; font-weight:700; line-height:1.2;
-      letter-spacing:-.03em; margin-bottom:8px;
-    }
+    h1 { font-size:26px; font-weight:700; line-height:1.25;
+         letter-spacing:-.025em; margin-bottom:6px; }
     h1 em { font-style:normal; color:var(--accent); }
-    .proj-desc { font-size:16px; color:var(--muted); margin-bottom:22px; }
+    .proj-desc { font-size:14px; color:var(--muted); margin-bottom:20px; }
     .meta {
-      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--light);
-      padding-bottom:32px; border-bottom:1.5px solid var(--border); margin-bottom:36px;
+      display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--light);
+      padding-bottom:28px; border-bottom:1.5px solid var(--border); margin-bottom:32px;
     }
     .meta-dot { color:var(--border); }
+
+    /* Summary */
+    .summary {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); padding:22px 24px 18px; margin-bottom:36px;
+    }
+    .summary-title {
+      font-family:var(--mono); font-size:9.5px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--light); margin-bottom:18px;
+    }
+    .meter-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .meter-row:last-child { margin-bottom:0; }
+    .m-label { font-size:12px; color:var(--muted); min-width:156px; flex-shrink:0; }
+
+    meter {
+      flex:1; height:7px; -webkit-appearance:none; appearance:none;
+      border:none; border-radius:4px; background:var(--border);
+    }
+    meter::-webkit-meter-bar { background:var(--border); border-radius:4px; border:none; }
+    meter::-webkit-meter-optimum-value,
+    meter::-webkit-meter-suboptimum-value,
+    meter::-webkit-meter-even-less-good-value { background:var(--accent); border-radius:4px; }
+    meter::-moz-meter-bar { background:var(--accent); }
 
     /* Feedback sections */
     .fb-section {
       border-radius:var(--r); border:1px solid transparent;
-      overflow:hidden; margin-bottom:20px;
+      overflow:hidden; margin-bottom:16px;
     }
     .fb-section:last-child { margin-bottom:0; }
 
@@ -64,38 +85,40 @@
     .fb-section.apply   { border-color:var(--aply-br);  background:var(--aply-bg); }
 
     .fb-head {
-      display:flex; align-items:center; gap:10px;
-      padding:16px 22px; border-bottom:1px solid transparent;
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-bottom:1px solid transparent;
     }
     .good    .fb-head { border-bottom-color:var(--good-br); }
     .improve .fb-head { border-bottom-color:var(--impv-br); }
     .apply   .fb-head { border-bottom-color:var(--aply-br); }
 
     .fb-icon {
-      width:24px; height:24px; border-radius:50%;
-      display:grid; place-items:center; font-size:13px; flex-shrink:0;
+      width:20px; height:20px; border-radius:50%;
+      display:grid; place-items:center; font-size:11px; flex-shrink:0;
     }
     .good    .fb-icon { background:var(--good);    color:#fff; }
     .improve .fb-icon { background:var(--improve); color:#fff; }
     .apply   .fb-icon { background:var(--apply);   color:#fff; }
 
-    .fb-heading { font-size:15px; font-weight:600; }
+    .fb-heading {
+      font-size:13px; font-weight:600;
+    }
     .good    .fb-heading { color:var(--good); }
     .improve .fb-heading { color:var(--improve); }
     .apply   .fb-heading { color:var(--apply); }
 
     .fb-count {
       margin-left:auto;
-      font-family:var(--mono); font-size:11px; color:var(--light);
+      font-family:var(--mono); font-size:10px; color:var(--light);
     }
 
-    .fb-items { padding:8px 0; }
+    .fb-items { padding:6px 0; }
 
     .fb-item {
-      padding:16px 22px;
+      padding:12px 18px;
       border-bottom:1px solid transparent;
-      font-size:16px; color:var(--text);
-      line-height:1.78; white-space:pre-wrap; word-break:break-word;
+      font-size:13.5px; color:var(--text);
+      line-height:1.72; white-space:pre-wrap; word-break:break-word;
     }
     .fb-item:last-child { border-bottom:none; }
     .good    .fb-item { border-bottom-color:var(--good-br); }
@@ -114,6 +137,32 @@
     <span>익명 응답</span>
     <span class="meta-dot">·</span>
     <span>총 5건</span>
+    <span class="meta-dot">·</span>
+    <span>점수 100점 만점 환산</span>
+  </div>
+
+  <div class="summary">
+    <div class="summary-title">항목별 평균 (전체 응답자)</div>
+      <div class="meter-row">
+        <span class="m-label">문제 정의와 서비스 흐름</span>
+        <meter value="92" min="0" max="100" optimum="100">92점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">AI 활용의 핵심성</span>
+        <meter value="92" min="0" max="100" optimum="100">92점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">기능 설명</span>
+        <meter value="96" min="0" max="100" optimum="100">96점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">데모/결과물</span>
+        <meter value="84" min="0" max="100" optimum="100">84점</meter>
+      </div>
+      <div class="meter-row">
+        <span class="m-label">발표 명확성</span>
+        <meter value="92" min="0" max="100" optimum="100">92점</meter>
+      </div>
   </div>
 
   <div class="fb-section good">
