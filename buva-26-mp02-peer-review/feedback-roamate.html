@@ -62,6 +62,10 @@
     .meter-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
     .meter-row:last-child { margin-bottom:0; }
     .m-label { font-size:12px; color:var(--muted); min-width:156px; flex-shrink:0; }
+    .summary-note {
+      font-size:11px; line-height:1.6; color:var(--light);
+      margin-top:16px; padding-top:14px; border-top:1px solid var(--border);
+    }
 
     meter {
       flex:1; height:7px; -webkit-appearance:none; appearance:none;
@@ -163,6 +167,7 @@
         <span class="m-label">발표 명확성</span>
         <meter value="87" min="0" max="100" optimum="100">87점</meter>
       </div>
+    <p class="summary-note">발표를 들은 동료들이 익명으로 매긴 주관적인 평가입니다. 성적이나 공식 평가 점수가 아닙니다.</p>
   </div>
 
   <div class="fb-section good">
